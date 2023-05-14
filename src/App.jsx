@@ -26,7 +26,7 @@ function App() {
     }
 
     const handleMove2 = (id) => {
-        setDone([...done,doing[id]])
+        setDone([doing[id],...done])
         setDoing(doing.filter((todo,index)=>{
             return index !== id
         }))
@@ -49,8 +49,14 @@ function App() {
     }
 
     const addDone = () => {
-        setDone([...done,doneval])
+        setDone([doneval,...done])
         setDoneval("")
+    }
+
+    const handleDelete3 = (id) => {
+        setDone(done.filter((todo,index) =>{
+            return index !== id
+        }))
     }
 
   return (
@@ -81,8 +87,8 @@ function App() {
             setDoneval(e.target.value)
         }}></input>
         <button onClick={addDone}>Add Done</button>
-        {done.slice(0).reverse().map((done,index) => {
-            return <Done text={done} index={index}/>
+        {done.map((done,index) => {
+            return <Done text={done} index={index} handleDelete={handleDelete3} />
         })}
         </div>
     </div>
